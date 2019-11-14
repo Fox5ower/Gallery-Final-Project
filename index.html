@@ -5,11 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <title>Gallery</title>
 </head>
 
 <body>
-
+    <div class="col s12 gallery-container">
+        <div class="col s4"></div>
+        <div id="drop-area" class="col s6">
+            <p>ВЫБЕРИТЕ ИЗОБРАЖЕНИЕ ИЛИ ПЕРЕТАЩИТЕ ЕГО В ВЫДЕЛЕННУЮ ОБЛАСТЬ</p>
+            <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+            <label class="button waves-effect waves-light btn-small" for="fileElem">Загрузить фото</label><br>
+            <div id="gallery"></div>
+            <progress id="progress-bar" class="progress-bar" max=100 value=0></progress>
+        </div>
+        <div class="col s4"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
