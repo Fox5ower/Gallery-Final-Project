@@ -1,5 +1,35 @@
 const dropArea = document.getElementById("drop-area");
-const progress = document.getElementById("progress-bar");
+
+let db;
+
+(function() {
+  window.indexedDB =
+    window.indexedDB ||
+    window.mozIndexedDB ||
+    window.webkitIndexedDB ||
+    window.msIndexedDB;
+
+  let request = indexedDB.open("Gallery", 1);
+
+  request.onupgradeneeded = event => {
+    db = event.target.result;
+
+    if (!db.objectStoreNames.contains("Gallery")) {
+      db.createObjectStore("Gallery", {
+        src: "",
+        keyPath: "id",
+        autoIncrement: true
+      });
+    }
+  };
+  request.onsuccess = event => {
+    console.log("Success! DB has been opened!");
+    db = event.target.result;
+  };
+  request.onerror = event => {
+    console.log("Error!");
+  };
+})();
 
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
   dropArea.addEventListener(eventName, preventDefaults, false);
@@ -39,28 +69,66 @@ function handleFiles(files) {
   files.forEach(previewFile);
 }
 
-let counter = 0;
+window.onload = () => {
+  setTimeout(() => {
+    let preloader = document.querySelector("#preloader");
+    preloader.style.display = "none";
+
+    readFromDb();
+  }, 1500);
+};
 
 function previewFile(file) {
-  counter++;
   let reader = new FileReader();
   reader.readAsDataURL(file);
+
   reader.onloadend = function() {
     let img = document.createElement("img");
     img.src = reader.result;
-    localStorage.setItem(counter, reader.result);
+
+    putIntoDb(file);
+
     document.getElementById("gallery").appendChild(img);
   };
 }
 
-window.onload = function() {
-  counter = document.cookie;
-  for (let i = 1; i <= localStorage.length; i++) {
-    let img = document.createElement("img");
-    img.src = localStorage.getItem(i);
-    document.getElementById("gallery").appendChild(img);
-  }
-};
-window.beforeunload = function() {
-  document.cookie = counter;
-};
+function readFromDb() {
+  let request = indexedDB.open("Gallery", 1);
+  request.onsuccess = e => {
+    db = e.target.result;
+    let transaction = db.transaction("Gallery", "readwrite");
+    let gallery = transaction.objectStore("Gallery").getAll();
+    gallery.onsuccess = function(event) {
+      let galleryArr = event.target.result;
+
+      for (let i = 0; i < galleryArr.length; i++) {
+        let imgFile = galleryArr[i].src;
+        console.log("Got image!");
+        let img = document.createElement("img");
+        img.src = imgFile;
+        document.getElementById("gallery").appendChild(img);
+      }
+    };
+  };
+}
+
+function putIntoDb(file) {
+  let request = indexedDB.open("Gallery", 1);
+  request.onsuccess = e => {
+    db = e.target.result;
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = function() {
+      let url = reader.result;
+      let transaction = db.transaction("Gallery", "readwrite");
+      let gallery = transaction.objectStore("Gallery").add({ src: url });
+      gallery.onsuccess = () => {
+        console.log("Photo has benn succesfully added to db");
+      };
+
+      gallery.onerror = () => {
+        console.log("Error with addind a photo to db");
+      };
+    };
+  };
+}

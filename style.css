@@ -20,10 +20,14 @@ body {
 }
 
 .gallery-container {
+  position: relative;
+  animation: showLeft cubic-bezier(0.9, 0.01, 0.88, 1) 2s;
   margin: auto;
 }
 
 .gallery {
+  position: relative;
+  animation: showRight cubic-bezier(0.9, 0.01, 0.88, 1) 2s;
   width: 80%;
 }
 
@@ -44,20 +48,21 @@ body {
   margin-top: 10px;
 }
 #gallery img {
+  box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.8);
+  transition: 0.7s;
+  display: block;
   width: 250px;
+  overflow: hidden;
   margin: 10px;
   vertical-align: middle;
 }
-#fileElem {
-  display: none;
-}
-.progress-bar {
-  display: none;
+
+#gallery img:hover {
+  transform: scale(1.05);
 }
 
-.progShow {
-  display: inline;
-  margin: 10px 0;
+#fileElem {
+  display: none;
 }
 
 .button {
@@ -66,4 +71,92 @@ body {
 label {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
+}
+
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  z-index: 100;
+}
+
+.cssload-container {
+  position: relative;
+}
+
+.cssload-whirlpool,
+.cssload-whirlpool::before,
+.cssload-whirlpool::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgb(224, 242, 255);
+  border-left-color: rgba(73, 209, 191, 0.98);
+  border-radius: 999px;
+  -o-border-radius: 999px;
+  -ms-border-radius: 999px;
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+}
+
+.cssload-whirlpool {
+  margin: -25px 0 0 -25px;
+  height: 50px;
+  width: 50px;
+  animation: cssload-rotate 950ms linear infinite;
+  -o-animation: cssload-rotate 950ms linear infinite;
+  -ms-animation: cssload-rotate 950ms linear infinite;
+  -webkit-animation: cssload-rotate 950ms linear infinite;
+  -moz-animation: cssload-rotate 950ms linear infinite;
+}
+
+.cssload-whirlpool::before {
+  content: "";
+  margin: -23px 0 0 -23px;
+  height: 44px;
+  width: 44px;
+  animation: cssload-rotate 950ms linear infinite;
+  -o-animation: cssload-rotate 950ms linear infinite;
+  -ms-animation: cssload-rotate 950ms linear infinite;
+  -webkit-animation: cssload-rotate 950ms linear infinite;
+  -moz-animation: cssload-rotate 950ms linear infinite;
+}
+
+.cssload-whirlpool::after {
+  content: "";
+  margin: -29px 0 0 -29px;
+  height: 56px;
+  width: 56px;
+  animation: cssload-rotate 1900ms linear infinite;
+  -o-animation: cssload-rotate 1900ms linear infinite;
+  -ms-animation: cssload-rotate 1900ms linear infinite;
+  -webkit-animation: cssload-rotate 1900ms linear infinite;
+  -moz-animation: cssload-rotate 1900ms linear infinite;
+}
+
+@keyframes cssload-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes showLeft {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes showRight {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0;
+  }
 }

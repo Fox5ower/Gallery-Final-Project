@@ -11,18 +11,19 @@
 </head>
 
 <body>
+    <div class="preloader" id="preloader">
+        <div class="cssload-container">
+            <div class="cssload-whirlpool"></div>
+        </div>
+    </div>
+
     <div class="col s12 gallery-container">
         <div class="col s4"></div>
         <div id="drop-area" class="col s6">
             <p>ВЫБЕРИТЕ ИЗОБРАЖЕНИЕ ИЛИ ПЕРЕТАЩИТЕ ЕГО В ВЫДЕЛЕННУЮ ОБЛАСТЬ</p>
             <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
             <label class="button waves-effect waves-light btn-small" for="fileElem">Загрузить фото</label><br>
-
-            <progress id="progress-bar" class="progress-bar" max=100 value=0></progress>
         </div>
-        <!-- <div class="col s12">
-            <div id="gallery"></div>
-        </div> -->
     </div>
     <div id="gallery" class="gallery"></div>
     <script src="script.js"></script>
