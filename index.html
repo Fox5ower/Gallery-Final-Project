@@ -17,11 +17,14 @@
             <p>ВЫБЕРИТЕ ИЗОБРАЖЕНИЕ ИЛИ ПЕРЕТАЩИТЕ ЕГО В ВЫДЕЛЕННУЮ ОБЛАСТЬ</p>
             <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
             <label class="button waves-effect waves-light btn-small" for="fileElem">Загрузить фото</label><br>
-            <div id="gallery"></div>
+
             <progress id="progress-bar" class="progress-bar" max=100 value=0></progress>
         </div>
-        <div class="col s4"></div>
+        <!-- <div class="col s12">
+            <div id="gallery"></div>
+        </div> -->
     </div>
+    <div id="gallery" class="gallery"></div>
     <script src="script.js"></script>
 </body>
 

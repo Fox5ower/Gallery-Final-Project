@@ -6,9 +6,12 @@ body {
   font-size: 12pt;
   color: #fff;
   opacity: 0.9;
-  height: 785px;
+  min-height: 785px;
+  max-height: 100%;
+  background-repeat: no-repeat;
   display: flex;
-  background: rgb(108, 164, 232);
+  flex-direction: column;
+  align-items: center;
   background: linear-gradient(
     45deg,
     rgba(108, 164, 232, 1) 0%,
@@ -18,7 +21,10 @@ body {
 
 .gallery-container {
   margin: auto;
-  width: 30%;
+}
+
+.gallery {
+  width: 80%;
 }
 
 #drop-area {
@@ -34,11 +40,12 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 10px;
 }
 #gallery img {
-  width: 150px;
-  margin: 10px 0;
+  width: 250px;
+  margin: 10px;
   vertical-align: middle;
 }
 #fileElem {
