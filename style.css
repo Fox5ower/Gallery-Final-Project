@@ -12,15 +12,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(
-    45deg,
-    rgba(108, 164, 232, 1) 0%,
-    rgba(0, 255, 179, 0.6866947462578781) 100%
-  );
+  background: linear-gradient(360deg, #3d81b9, #7f7aac79);
 }
 
 .head {
   width: 100%;
+  margin-top: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -136,13 +133,17 @@ body {
 }
 
 #drop-area {
-  border: 2px dashed rgba(54, 67, 255, 0.199);
+  display: none;
+  transition: 200ms;
+  border: 2px dashed rgba(67, 79, 255, 0.8);
   border-radius: 20px;
   padding: 20px;
   text-align: center;
+  background-color: rgba(198, 194, 255, 0.733);
 }
 #drop-area.highlight {
-  border-color: rgba(54, 67, 255, 0.514);
+  transition: 200ms;
+  border-color: rgb(2, 8, 85);
 }
 #gallery {
   display: flex;
@@ -244,11 +245,16 @@ label {
   position: absolute;
   z-index: 1001;
   top: 10px;
-  right: 20px;
+  right: 10px;
   border: 0;
   padding: 5px 10px;
   border-radius: 5px;
   background: none;
+}
+
+.modal-window .close-button img {
+  height: 15px;
+  width: 15px;
 }
 
 .cssload-container {

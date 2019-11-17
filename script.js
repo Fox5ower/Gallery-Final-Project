@@ -1,8 +1,11 @@
 const dropArea = document.querySelector("#drop-area");
 const userGallery = document.querySelector("#gallery");
+const modalUpload = document.querySelector("#modalUpload");
 const modal = document.querySelector("#modal");
 const modalOverlay = document.querySelector("#modal-bg");
 const closeButton = document.querySelector("#close-button");
+const closeUploadBtn = document.querySelector("#close-upload");
+const loadPhotoBtn = document.querySelector(".load-photo");
 const twoColsButton = document.querySelector(".twoCols");
 const threeColsButton = document.querySelector(".threeCols");
 const fourColsButton = document.querySelector(".fourCols");
@@ -171,12 +174,22 @@ function putIntoDb(file) {
   };
 }
 
-closeButton.addEventListener("click", function() {
+loadPhotoBtn.onclick = () => {
+  modalUpload.style.display = "block";
+  dropArea.style.display = "block";
+};
+
+closeButton.onclick = () => {
   let modalImage = document.querySelector(".modal-window").lastChild;
   modal.removeChild(modalImage);
   modal.style.display = "none";
   modalOverlay.style.display = "none";
-});
+};
+
+closeUploadBtn.onclick = () => {
+  modalUpload.style.display = "none";
+  dropArea.style.display = "none";
+};
 
 twoColsButton.onclick = () => {
   let images = document.querySelectorAll(".img");

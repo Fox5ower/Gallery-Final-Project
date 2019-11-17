@@ -17,11 +17,7 @@
         </div>
     </div>
     <div class="col s12 head">
-        <div id="drop-area">
-            <p>ВЫБЕРИТЕ ИЗОБРАЖЕНИЕ ИЛИ ПЕРЕТАЩИТЕ ЕГО В ВЫДЕЛЕННУЮ ОБЛАСТЬ</p>
-            <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
-            <label class="button waves-effect waves-light btn-small" for="fileElem">Загрузить фото</label><br>
-        </div>
+        <label class="button waves-effect waves-light btn-small load-photo">Загрузить фото</label>
         <div class="gridContainer">
             <img src="./img/two_columns.png" class="gridChanger twoCols">
             <img src="./img/three_columns.png" class="gridChanger threeCols">
@@ -35,6 +31,14 @@
     <div id="gallery" class="gallery"></div>
     <div class="modal-window" id="modal">
         <button class="close-button" id="close-button"><img src="./img/close.png"></button>
+    </div>
+    <div class="modal-window" id="modalUpload">
+        <button class="close-button" id="close-upload"><img src="./img/close.png"></button>
+        <div id="drop-area">
+            <p>ВЫБЕРИТЕ ИЗОБРАЖЕНИЕ ИЛИ ПЕРЕТАЩИТЕ ЕГО В ВЫДЕЛЕННУЮ ОБЛАСТЬ</p>
+            <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+            <label class="button waves-effect waves-light btn-small" for="fileElem">Загрузить...</label><br>
+        </div>
     </div>
     <div class="modal-bg" id="modal-bg"></div>
     <script src="script.js"></script>
