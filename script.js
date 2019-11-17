@@ -3,6 +3,9 @@ const userGallery = document.querySelector("#gallery");
 const modal = document.querySelector("#modal");
 const modalOverlay = document.querySelector("#modal-bg");
 const closeButton = document.querySelector("#close-button");
+const twoColsButton = document.querySelector(".twoCols");
+const threeColsButton = document.querySelector(".threeCols");
+const fourColsButton = document.querySelector(".fourCols");
 
 let db;
 
@@ -174,3 +177,27 @@ closeButton.addEventListener("click", function() {
   modal.style.display = "none";
   modalOverlay.style.display = "none";
 });
+
+twoColsButton.onclick = () => {
+  let images = document.querySelectorAll(".img");
+  for (i = 0; i < images.length; i++) {
+    images[i].classList.remove("imgFourCols", "imgThreeCols");
+    images[i].classList.toggle("imgTwoCols");
+  }
+};
+
+threeColsButton.onclick = () => {
+  let images = document.querySelectorAll(".img");
+  for (i = 0; i < images.length; i++) {
+    images[i].classList.remove("imgFourCols", "imgTwoCols");
+    images[i].classList.toggle("imgThreeCols");
+  }
+};
+
+fourColsButton.onclick = () => {
+  let images = document.querySelectorAll(".img");
+  for (i = 0; i < images.length; i++) {
+    images[i].classList.remove("imgThreeCols", "imgTwoCols");
+    images[i].classList.toggle("imgFourCols");
+  }
+};
