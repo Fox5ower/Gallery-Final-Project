@@ -44,21 +44,6 @@ window.onload = () => {
   }, 1500);
 };
 
-//как при добавлении картинки динамически навешивать иконке обработчик событий?
-setTimeout(() => {
-  const iconExpand = document.querySelectorAll(".icon");
-  const imgArr = document.querySelectorAll(".img");
-  console.log(iconExpand);
-  for (let i = 0; i < iconExpand.length; i++) {
-    iconExpand[i].addEventListener("click", function() {
-      let modalImg = imgArr[i].cloneNode(true);
-      modal.style.display = "block";
-      modalOverlay.style.display = "block";
-      modal.appendChild(modalImg);
-    });
-  }
-}, 3000);
-
 //Prevent defaults для того, чтобы браузер не просто открыл перетаскиваемый файл
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
   dropArea.addEventListener(eventName, preventDefaults, false);
@@ -98,6 +83,7 @@ function handleFiles(files) {
   files.forEach(previewFile);
 }
 
+//функция добавления на страницу контейнера с фотографией (загруженной или прочитанной из бд) и иконкой
 function addImage(img) {
   this.img = img;
   img.classList.add("img");
@@ -111,11 +97,20 @@ function addImage(img) {
   let icon = document.createElement("img");
   icon.classList.add("icon");
   icon.src = "./img/expand.png";
+
+  icon.addEventListener("click", function() {
+    let modalImg = img.cloneNode(true);
+    modal.style.display = "block";
+    modalOverlay.style.display = "block";
+    modal.appendChild(modalImg);
+  });
+
   iconContainer.appendChild(icon);
   parent.insertBefore(iconContainer, img.nextSibling);
   userGallery.appendChild(imageContainer);
 }
 
+//отображение загруженной картинки
 function previewFile(file) {
   let reader = new FileReader();
   reader.readAsDataURL(file);
@@ -130,7 +125,8 @@ function previewFile(file) {
   };
 }
 
-async function readFromDb() {
+// отображение картинки взятой из бд
+function readFromDb() {
   let request = indexedDB.open("Gallery", 1);
   request.onsuccess = e => {
     db = e.target.result;
@@ -151,6 +147,7 @@ async function readFromDb() {
   };
 }
 
+// добавление картинки в бд
 function putIntoDb(file) {
   let request = indexedDB.open("Gallery", 1);
   request.onsuccess = e => {
