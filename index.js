@@ -68,4 +68,8 @@ app.get("/img/logo.png", (req, res) => {
   res.sendFile(__dirname + "/img/logo.png");
 });
 
+app.get("/img/back.png", (req, res) => {
+  res.sendFile(__dirname + "/img/back.png");
+});
+
 app.listen(3000);

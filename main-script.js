@@ -2,39 +2,50 @@ const btnCreate = document.querySelector("#btn-create");
 const btnClose = document.querySelector("#close-add");
 const modal = document.querySelector("#modal");
 const modalBody = document.querySelector("#modal-body");
+const modalUpload = document.querySelector("#modalUpload");
 const modalOverlay = document.querySelector("#modal-bg");
 const btnAddGallery = document.querySelector(".sendName");
 const galleryName = document.querySelector("#galleryName");
+const box = document.querySelector("#box");
+const card = document.querySelector("#card");
 
 (function() {
-  window.indexedDB =
-    window.indexedDB ||
-    window.mozIndexedDB ||
-    window.webkitIndexedDB ||
-    window.msIndexedDB;
+  let namesArr = JSON.parse(localStorage.getItem("names")) || [];
+  namesArr.forEach(el => {
+    window.indexedDB =
+      window.indexedDB ||
+      window.mozIndexedDB ||
+      window.webkitIndexedDB ||
+      window.msIndexedDB;
 
-  let request = indexedDB.open("Gallery", 1);
+    let request = indexedDB.open(el, 1);
 
-  request.onupgradeneeded = event => {
-    db = event.target.result;
-    console.log(`Onupgradeneeded! Galleries: ${db}`);
-    // if (!db.objectStoreNames.contains("Gallery")) {
-    //   db.createObjectStore("Gallery", {
-    //     src: "",
-    //     keyPath: "id",
-    //     autoIncrement: true
-    //   });
-    // }
-  };
-  request.onsuccess = event => {
-    db = event.target.result;
-    console.log(
-      `Success! DB has been opened! ${JSON.stringify(db.objectStoreNames)}`
-    );
-  };
-  request.onerror = event => {
-    console.log("Error!");
-  };
+    request.onsuccess = event => {
+      db = event.target.result;
+      let transaction = db.transaction(el, "readwrite");
+      let img = transaction.objectStore(el).get(1);
+
+      img.onsuccess = () => {
+        // можно было бы улучшить используя hbs или jade
+        console.log(img.result.src);
+        let newCard = card.cloneNode(true);
+        let h2 = document.createElement("h2");
+        h2.innerText = el;
+        newCard.style.display = "flex";
+        newCard.firstChild.nextSibling.firstChild.nextSibling.src =
+          img.result.src;
+        let oldH2 = newCard.lastChild.previousSibling.lastChild.previousSibling;
+        newCard.lastChild.previousSibling.replaceChild(h2, oldH2);
+
+        newCard.href = `/index.html?name=${el}`;
+
+        box.appendChild(newCard);
+      };
+    };
+    request.onerror = event => {
+      console.log("Error!");
+    };
+  });
 })();
 
 btnClose.onclick = () => {
@@ -53,5 +64,12 @@ btnAddGallery.onclick = () => {
   if (galleryName.value != "" || galleryName.value != null) {
     btnAddGallery.href = `/index.html?name=${galleryName.value}`;
     console.log(btnAddGallery.href);
+    if (localStorage.getItem("names") == null) {
+      localStorage.setItem("names", JSON.stringify([]));
+    }
+
+    let namesArr = JSON.parse(localStorage.getItem("names"));
+    namesArr.push(galleryName.value);
+    localStorage.setItem("names", JSON.stringify(namesArr));
   }
 };

@@ -27,17 +27,23 @@ body {
 }
 
 .head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   width: 100%;
   margin-top: 15px;
 }
 
 label#btn.btn-small {
   background-color: rgba(133, 133, 133, 0.2);
-  position: fixed;
 }
 
 label#btn-upload.btn-small {
   background-color: rgba(133, 133, 133, 0.4);
+}
+
+#btn img {
+  margin-top: 3px;
 }
 
 .gridContainer {
@@ -91,7 +97,7 @@ label#btn-upload.btn-small {
 
 .gallery-container {
   position: relative;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .gallery {
@@ -149,7 +155,6 @@ label#btn-upload.btn-small {
 }
 
 .load-photo {
-  margin-left: 50px;
 }
 
 .load-photo img {

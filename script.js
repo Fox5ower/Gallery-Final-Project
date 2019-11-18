@@ -23,7 +23,7 @@ let db;
     window.webkitIndexedDB ||
     window.msIndexedDB;
 
-  let request = indexedDB.open("Gallery", 1);
+  let request = indexedDB.open(name, 1);
 
   request.onupgradeneeded = event => {
     db = event.target.result;

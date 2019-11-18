@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap");
 body {
   opacity: 0.9;
@@ -15,6 +16,11 @@ body {
   min-height: 100vh;
   font-family: "Montserrat Alternates", sans-serif;
   background: linear-gradient(360deg, #535d64, #7f7aac79);
+}
+
+label#btn-create.btn-small {
+  margin: 10px;
+  background-color: rgba(133, 133, 133, 0.2);
 }
 
 .modal-window {
@@ -69,9 +75,6 @@ body {
   margin: 20px;
 }
 
-.header {
-  margin: 30px 20px 5px 20px;
-}
 body a {
   font-family: "Montserrat Alternates", sans-serif;
   margin: 10px;
@@ -79,11 +82,17 @@ body a {
   color: white;
   text-decoration: underline;
 }
+
+.a {
+  width: 100%;
+  height: 100%;
+}
+
 p {
-  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Monoton", sans-serif;
   font-size: 26pt;
   color: #fff;
-  margin: 0 10px 10px 10px;
+  margin: 0 10px 30px 10px;
   opacity: 0.8;
 }
 
@@ -95,6 +104,7 @@ input {
 .logo {
   width: 78px;
   height: 40px;
+  margin: 30px 20px 30px 20px;
 }
 
 .box {
@@ -105,6 +115,7 @@ input {
   margin: 30px auto;
 }
 .card {
+  display: none;
   cursor: pointer;
   position: relative;
   width: 300px;
@@ -169,18 +180,11 @@ input {
 }
 
 .card .details h2 {
-  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  margin: 15px 0 0 0;
   padding: 0;
   font-weight: 600;
-  font-size: 20px;
-  color: #777;
+  font-size: 25px;
+  color: #2d363b;
   text-transform: uppercase;
-}
-
-.card .details h2 span {
-  font-weight: 500;
-  font-size: 16px;
-  color: #f38695;
-  display: block;
-  margin-top: 5px;
 }
