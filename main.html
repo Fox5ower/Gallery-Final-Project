@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style-main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <title>gallery.io</title>
+</head>
+
+<body>
+    <div class="header">
+        <img src="/img/logo.png" class="logo">
+    </div>
+    <p>Your Personal Gallery.</p>
+    <a href="index.html">Gallery</a>
+    <label class="button waves-effect waves-light btn-small" id="btn-create">Создать галерею</label><br>
+
+    <div class="box">
+        <!-- <a href="/index.html:Gallery"></a> -->
+        <div class="card">
+            <div class="imgBx">
+                <img src="">
+            </div>
+            <div class="details">
+                <h2>Your Gallery<br><span>Gallery</span></h2>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="modal-window" id="modalUpload">
+        <button class="close-button" id="close-add"><img src="./img/close.png"></button>
+        <div id="modal-body">
+            <p>Укажите имя вашей новой галереи</p>
+            <input type="text" id="galleryName">
+            <a href="" class="button waves-effect waves-light btn-small sendName" id="btn-upload">Добавить</a><br>
+        </div>
+    </div>
+    <div class="modal-bg" id="modal-bg"></div>
+    <script src="main-script.js"></script>
+
+</body>
+
+</html>

@@ -10,6 +10,10 @@ const twoColsButton = document.querySelector(".twoCols");
 const threeColsButton = document.querySelector(".threeCols");
 const fourColsButton = document.querySelector(".fourCols");
 
+let params = new URLSearchParams(document.location.search.substring(1));
+let name = params.get("name");
+console.log(name);
+
 let db;
 
 (function() {
@@ -24,8 +28,8 @@ let db;
   request.onupgradeneeded = event => {
     db = event.target.result;
 
-    if (!db.objectStoreNames.contains("Gallery")) {
-      db.createObjectStore("Gallery", {
+    if (!db.objectStoreNames.contains(name)) {
+      db.createObjectStore(name, {
         src: "",
         keyPath: "id",
         autoIncrement: true
@@ -40,15 +44,6 @@ let db;
     console.log("Error!");
   };
 })();
-
-window.onload = () => {
-  setTimeout(() => {
-    let preloader = document.querySelector("#preloader");
-    preloader.style.display = "none";
-
-    readFromDb();
-  }, 1500);
-};
 
 //Prevent defaults для того, чтобы браузер не просто открыл перетаскиваемый файл
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
@@ -133,11 +128,11 @@ function previewFile(file) {
 
 // отображение картинки взятой из бд
 function readFromDb() {
-  let request = indexedDB.open("Gallery", 1);
+  let request = indexedDB.open(name, 1);
   request.onsuccess = e => {
     db = e.target.result;
-    let transaction = db.transaction("Gallery", "readwrite");
-    let gallery = transaction.objectStore("Gallery").getAll();
+    let transaction = db.transaction(name, "readwrite");
+    let gallery = transaction.objectStore(name).getAll();
     gallery.onsuccess = function(event) {
       let galleryArr = event.target.result;
 
@@ -155,15 +150,15 @@ function readFromDb() {
 
 // добавление картинки в бд
 function putIntoDb(file) {
-  let request = indexedDB.open("Gallery", 1);
+  let request = indexedDB.open(name, 1);
   request.onsuccess = e => {
     db = e.target.result;
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = function() {
       let url = reader.result;
-      let transaction = db.transaction("Gallery", "readwrite");
-      let gallery = transaction.objectStore("Gallery").add({ src: url });
+      let transaction = db.transaction(name, "readwrite");
+      let gallery = transaction.objectStore(name).add({ src: url });
       gallery.onsuccess = () => {
         console.log("Photo has benn succesfully added to db");
       };
@@ -174,6 +169,7 @@ function putIntoDb(file) {
   };
 }
 
+// открытие модального окна для загрузки изображений
 loadPhotoBtn.onclick = () => {
   modalUpload.style.display = "block";
   dropArea.style.display = "block";

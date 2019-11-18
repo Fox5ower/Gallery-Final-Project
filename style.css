@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Russo+One&display=swap");
 
 body {
-  font-family: "Russo One", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 12pt;
-  color: #fff;
+  font-weight: 500;
+  color: rgb(32, 32, 32);
   opacity: 0.9;
   min-height: 785px;
   max-height: 100%;
@@ -12,19 +14,34 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(360deg, #3d81b9, #7f7aac79);
+  background: linear-gradient(360deg, #535d64, #7f7aac79);
+}
+
+.header {
+  margin: 30px 20px 5px 20px;
+}
+
+.logo {
+  width: 78px;
+  height: 40px;
 }
 
 .head {
   width: 100%;
   margin-top: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+}
+
+label#btn.btn-small {
+  background-color: rgba(133, 133, 133, 0.2);
+  position: fixed;
+}
+
+label#btn-upload.btn-small {
+  background-color: rgba(133, 133, 133, 0.4);
 }
 
 .gridContainer {
+  right: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -74,13 +91,11 @@ body {
 
 .gallery-container {
   position: relative;
-  animation: showLeft cubic-bezier(0.9, 0.01, 0.88, 1) 2s;
   margin: auto;
 }
 
 .gallery {
   position: relative;
-  animation: showRight cubic-bezier(0.9, 0.01, 0.88, 1) 2s;
   width: 80%;
 }
 
@@ -93,6 +108,7 @@ body {
 }
 
 .imageContainer {
+  animation: opacity 2s;
   display: inline-block;
   position: relative;
 }
@@ -132,6 +148,14 @@ body {
   transform: scale(1.05);
 }
 
+.load-photo {
+  margin-left: 50px;
+}
+
+.load-photo img {
+  margin-top: 3px;
+}
+
 #drop-area {
   display: none;
   transition: 200ms;
@@ -139,7 +163,7 @@ body {
   border-radius: 20px;
   padding: 20px;
   text-align: center;
-  background-color: rgba(198, 194, 255, 0.733);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 #drop-area.highlight {
   transition: 200ms;
@@ -316,20 +340,13 @@ label {
     transform: rotate(360deg);
   }
 }
-@keyframes showLeft {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 0;
-  }
-}
 
-@keyframes showRight {
+@keyframes opacity {
   0% {
-    right: -100%;
+    opacity: 0;
   }
+
   100% {
-    right: 0;
+    opacity: 1;
   }
 }
