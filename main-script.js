@@ -11,6 +11,8 @@ const card = document.querySelector("#card");
 
 (function() {
   let namesArr = JSON.parse(localStorage.getItem("names")) || [];
+
+  console.log(namesArr);
   namesArr.forEach(el => {
     window.indexedDB =
       window.indexedDB ||
@@ -19,7 +21,7 @@ const card = document.querySelector("#card");
       window.msIndexedDB;
 
     let request = indexedDB.open(el, 1);
-
+    console.log(el);
     request.onsuccess = event => {
       db = event.target.result;
       let transaction = db.transaction(el, "readwrite");
