@@ -9,10 +9,9 @@ const galleryName = document.querySelector("#galleryName");
 const box = document.querySelector("#box");
 const card = document.querySelector("#card");
 
-(function() {
+window.onload = function() {
   let namesArr = JSON.parse(localStorage.getItem("names")) || [];
 
-  console.log(namesArr);
   namesArr.forEach(el => {
     window.indexedDB =
       window.indexedDB ||
@@ -21,21 +20,21 @@ const card = document.querySelector("#card");
       window.msIndexedDB;
 
     let request = indexedDB.open(el, 1);
-    console.log(el);
     request.onsuccess = event => {
       db = event.target.result;
       let transaction = db.transaction(el, "readwrite");
       let img = transaction.objectStore(el).get(1);
-
+      // cоздание карточки с миниатюрой первого фото из галереи
       img.onsuccess = () => {
         // можно было бы улучшить используя hbs или jade
-        console.log(img.result.src);
         let newCard = card.cloneNode(true);
         let h2 = document.createElement("h2");
         h2.innerText = el;
+
         newCard.style.display = "flex";
         newCard.firstChild.nextSibling.firstChild.nextSibling.src =
           img.result.src;
+
         let oldH2 = newCard.lastChild.previousSibling.lastChild.previousSibling;
         newCard.lastChild.previousSibling.replaceChild(h2, oldH2);
 
@@ -48,7 +47,7 @@ const card = document.querySelector("#card");
       console.log("Error!");
     };
   });
-})();
+};
 
 btnClose.onclick = () => {
   modalUpload.style.display = "none";
@@ -65,13 +64,25 @@ btnCreate.onclick = () => {
 btnAddGallery.onclick = () => {
   if (galleryName.value != "" || galleryName.value != null) {
     btnAddGallery.href = `/index.html?name=${galleryName.value}`;
-    console.log(btnAddGallery.href);
+
     if (localStorage.getItem("names") == null) {
       localStorage.setItem("names", JSON.stringify([]));
     }
 
     let namesArr = JSON.parse(localStorage.getItem("names"));
+
     namesArr.push(galleryName.value);
+
     localStorage.setItem("names", JSON.stringify(namesArr));
   }
 };
+
+// deleteGallery.onclick = () => {
+//   let name = deleteGallery.parentNode.firstChild.nextSibling;
+//   let request = indexedDB.deleteDatabase(name);
+
+//   request.onsuccess = () => {
+//     console.log(`Gallery ${name} has been deleted`);
+
+//   }
+// };

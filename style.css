@@ -154,9 +154,6 @@ label#btn-upload.btn-small {
   transform: scale(1.05);
 }
 
-.load-photo {
-}
-
 .load-photo img {
   margin-top: 3px;
 }
@@ -310,10 +307,6 @@ label {
   height: 50px;
   width: 50px;
   animation: cssload-rotate 950ms linear infinite;
-  -o-animation: cssload-rotate 950ms linear infinite;
-  -ms-animation: cssload-rotate 950ms linear infinite;
-  -webkit-animation: cssload-rotate 950ms linear infinite;
-  -moz-animation: cssload-rotate 950ms linear infinite;
 }
 
 .cssload-whirlpool::before {
@@ -322,10 +315,6 @@ label {
   height: 44px;
   width: 44px;
   animation: cssload-rotate 950ms linear infinite;
-  -o-animation: cssload-rotate 950ms linear infinite;
-  -ms-animation: cssload-rotate 950ms linear infinite;
-  -webkit-animation: cssload-rotate 950ms linear infinite;
-  -moz-animation: cssload-rotate 950ms linear infinite;
 }
 
 .cssload-whirlpool::after {
@@ -334,10 +323,6 @@ label {
   height: 56px;
   width: 56px;
   animation: cssload-rotate 1900ms linear infinite;
-  -o-animation: cssload-rotate 1900ms linear infinite;
-  -ms-animation: cssload-rotate 1900ms linear infinite;
-  -webkit-animation: cssload-rotate 1900ms linear infinite;
-  -moz-animation: cssload-rotate 1900ms linear infinite;
 }
 
 @keyframes cssload-rotate {

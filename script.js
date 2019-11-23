@@ -12,7 +12,6 @@ const fourColsButton = document.querySelector(".fourCols");
 
 let params = new URLSearchParams(document.location.search.substring(1));
 let name = params.get("name");
-console.log(name);
 
 let db;
 
@@ -45,15 +44,18 @@ let db;
   };
 })();
 
-//Prevent defaults для того, чтобы браузер не просто открыл перетаскиваемый файл
+//Prevent defaults для того, чтобы браузер не просто открыл перетаскиваемый файл и предотвратилось всплытие
 ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
   dropArea.addEventListener(eventName, preventDefaults, false);
   document.body.addEventListener(eventName, preventDefaults, false);
 });
 
+// подcветка border при перетаскивании изображения
 ["dragenter", "dragover"].forEach(eventName => {
   dropArea.addEventListener(eventName, highlight, false);
 });
+
+// отключение подcветки при покидании зоны drop
 ["dragleave", "drop"].forEach(eventName => {
   dropArea.addEventListener(eventName, unhighlight, false);
 });
@@ -62,6 +64,7 @@ dropArea.addEventListener("drop", handleDrop, false);
 
 function preventDefaults(e) {
   e.preventDefault();
+  // предотвращаем всплытие
   e.stopPropagation();
 }
 
@@ -123,22 +126,27 @@ function previewFile(file) {
     img.src = reader.result;
 
     addImage(img);
+
+    modalUpload.style.display = "none";
+    dropArea.style.display = "none";
   };
 }
 
 // отображение картинки взятой из бд
 function readFromDb() {
+  // открываем бд
   let request = indexedDB.open(name, 1);
+
   request.onsuccess = e => {
     db = e.target.result;
     let transaction = db.transaction(name, "readwrite");
     let gallery = transaction.objectStore(name).getAll();
+
     gallery.onsuccess = function(event) {
       let galleryArr = event.target.result;
 
       for (let i = 0; i < galleryArr.length; i++) {
         let imgFile = galleryArr[i].src;
-        console.log("Got image!");
         let img = document.createElement("img");
         img.src = imgFile;
 
@@ -154,10 +162,13 @@ function putIntoDb(file) {
   request.onsuccess = e => {
     db = e.target.result;
     let reader = new FileReader();
+    // читаем файл как юрл (для фото)
     reader.readAsDataURL(file);
     reader.onloadend = function() {
       let url = reader.result;
+      // создаем транзакцию с возможностью записи
       let transaction = db.transaction(name, "readwrite");
+      // транзакция: добавление в хранилище обьекта с src = url фото
       let gallery = transaction.objectStore(name).add({ src: url });
       gallery.onsuccess = () => {
         console.log("Photo has benn succesfully added to db");
@@ -175,6 +186,7 @@ loadPhotoBtn.onclick = () => {
   dropArea.style.display = "block";
 };
 
+// открытие модального окна для просмотра фото full-screen
 closeButton.onclick = () => {
   let modalImage = document.querySelector(".modal-window").lastChild;
   modal.removeChild(modalImage);
@@ -210,3 +222,20 @@ fourColsButton.onclick = () => {
     images[i].classList.toggle("imgFourCols");
   }
 };
+
+// deleteImage.onclick = () => {
+//   let galleryName = name;
+//   let src = deleteImage.nextSibling.src;
+//   let request = indexedDB.open(name, 1);
+//   request.onsuccess = e => {
+//     db = e.target.result;
+//     db.forEach(el => {
+//       if (el.src == src) {
+//         let key = el.key;
+//         let transaction = db.transaction(name, "readwrite");
+//         let deleteReauest = transaction.objectStore(name).delete(key);
+//         document.location.reload(true);
+//       }
+//     });
+//   };
+// };

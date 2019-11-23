@@ -22,13 +22,17 @@ label#btn-create.btn-small {
   margin: 10px;
   background-color: rgba(133, 133, 133, 0.2);
 }
+#btn-upload,
+#deleteGallery {
+  background-color: rgba(133, 133, 133, 0.2);
+}
 
 .modal-window {
   display: none;
   max-width: 1200px;
   max-height: 800px;
   position: fixed;
-  z-index: 1000;
+  z-index: 100;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -96,6 +100,11 @@ p {
   opacity: 0.8;
 }
 
+p.plainText {
+  font-family: "Montserrat Alternates", sans-serif;
+  margin: 0 10px 0 10px;
+}
+
 input {
   font-family: "Montserrat Alternates", sans-serif;
   color: #fff;
@@ -110,7 +119,7 @@ input {
 .box {
   width: 1200px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 145px;
   margin: 30px auto;
 }

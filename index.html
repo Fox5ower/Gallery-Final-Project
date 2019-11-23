@@ -22,7 +22,7 @@
         <a href="/"><img src="/img/logo.png" class="logo"></a>
     </div>
     <div class="col s12 head">
-        <a onclick="window.history.go(-1)"><label class="button waves-effect waves-light btn-small" id="btn"><img
+        <a href="/"><label class="button waves-effect waves-light btn-small" id="btn"><img
                     src="./img/back.png"></label></a>
         <div class="gridContainer">
             <img src="./img/two_columns.png" class="gridChanger twoCols">
@@ -43,10 +43,10 @@
     <div class="modal-window" id="modalUpload">
         <button class="close-button" id="close-upload"><img src="./img/close.png"></button>
         <div id="drop-area">
-            <p>ВЫБЕРИТЕ ИЗОБРАЖЕНИЕ ИЛИ ПЕРЕТАЩИТЕ ЕГО В ВЫДЕЛЕННУЮ ОБЛАСТЬ</p>
+            <p>CHOOSE THE IMAGE OR DRAG IT TO THE HIGHLOGHTED AREA</p>
             <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
             <label class="button waves-effect waves-light btn-small" id="btn-upload"
-                for="fileElem">Загрузить...</label><br>
+                for="fileElem">Upload...</label><br>
         </div>
     </div>
     <div class="modal-bg" id="modal-bg"></div>
